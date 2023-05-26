@@ -3,7 +3,7 @@ export const handleLogin = async (username, password, navigation) => {
     // Replace this with your own implementation
 
     if (username === '' && password === '') {
-      navigation.navigate("MainScreen");
+      navigation.navigate("Main");
   }
 }
 
