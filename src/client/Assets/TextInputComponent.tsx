@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     input: {
         width: '80%',
         height: 50,
-        marginBottom: 16,
+        margin:16,
         paddingHorizontal: 12,
         borderWidth: 1,
         borderColor: '#ccc',

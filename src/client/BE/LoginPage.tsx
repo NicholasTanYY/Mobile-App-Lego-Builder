@@ -18,6 +18,6 @@ export const handleLogin = async (username, password, navigation) => {
   return;
 };
 
-export const handleSignup = async navigation => {
-  navigation.navigate('Signup');
-};
+export const handleSignup = async (navigation) => {
+  navigation.navigate("Sign up");
+}

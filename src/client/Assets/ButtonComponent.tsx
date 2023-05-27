@@ -11,7 +11,7 @@ const ButtonComponent = ({text, func}) => {
 
 export const styles = StyleSheet.create({
     button: {
-      marginTop: 10,
+      margin: 10,
       width: '80%',
       backgroundColor: 'blue',
       paddingVertical: 10,
