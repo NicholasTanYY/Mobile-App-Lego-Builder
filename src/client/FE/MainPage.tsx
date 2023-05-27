@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import { RootStackParamList } from '../AppNavigator';
 import ButtonComponent from '../Assets/ButtonComponent';
 import TextComponent from '../Assets/TextComponent';
-import { handleExistingBuild, handleNewBuild } from '../BE/MainPage';
+import { handleExistingBuild, handleNewBuild, handleSettings } from '../BE/MainPage';
 
 type MainPageNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
 type Props = {
@@ -18,6 +18,7 @@ const MainPage = ( {navigation} : Props ) => {
         <TextComponent type="textTitle" text="Welcome to the Main Page!"/>
         <ButtonComponent text="New Build" func={() => handleNewBuild(navigation)} />
         <ButtonComponent text="Existing Build" func={() => handleExistingBuild(navigation)} />
+        <ButtonComponent text="Settings" func={() => handleSettings(navigation)}/>
     </View>
   );
 };

@@ -5,7 +5,7 @@ import { RootStackParamList } from '../AppNavigator';
 import ButtonComponent from '../Assets/ButtonComponent';
 import TextInputComponent from '../Assets/TextInputComponent';
 import { handleLogin, handleSignup } from '../BE/LoginPage';
-import TextComponent from '../Assets/TextComponent';
+import TouchableTextComponent from '../Assets/TouchableTextComponent';
 
 
 type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
@@ -22,9 +22,7 @@ const LoginPage = ({ navigation }: Props) => {
       <TextInputComponent placeholder="Username" func={setUsername} value={username} />
       <TextInputComponent placeholder="Password" func={setPassword} value={password} />
       <ButtonComponent text="Login" func={() => handleLogin(username, password, navigation)} />
-      <TouchableOpacity onPress={() => handleSignup(navigation)}>
-          <TextComponent type="subText" text="Don't have an account? Sign up here!"/>
-      </TouchableOpacity>
+      <TouchableTextComponent text="Don't have an account? Sign up here!" func={() => handleSignup(navigation)}/>
     </View>
   );
 };

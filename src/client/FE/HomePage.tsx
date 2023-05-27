@@ -4,7 +4,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../AppNavigator';
 import ButtonComponent from '../Assets/ButtonComponent';
 import TextComponent from '../Assets/TextComponent';
-import { handleFAQ, handleLogin, handleSettings } from '../BE/HomePage';
+import { handleFAQ, handleLogin, handleSignup } from '../BE/HomePage';
 
 type HomePageNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 type Props = {
@@ -16,7 +16,7 @@ const HomePage = ({navigation}: Props) => {
     <View style={styles.container}>
       <TextComponent type="textTitle" text="Welcome to the Home Screen!" />
       <ButtonComponent text="Login" func={() => handleLogin(navigation)} />
-      <ButtonComponent text="Settings" func={() => handleSettings(navigation)}/>
+      <ButtonComponent text="Signup" func={() => handleSignup(navigation)} />
       <ButtonComponent text="FAQ" func={() => handleFAQ(navigation)} />
     </View>
   );

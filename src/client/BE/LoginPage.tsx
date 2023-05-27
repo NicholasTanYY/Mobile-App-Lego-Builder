@@ -16,5 +16,5 @@ export const handleLogin = async (username, password, navigation) => {
 }
 
 export const handleSignup = async (navigation) => {
-  navigation.navigate("Signup");
+  navigation.navigate("Sign up");
 }
