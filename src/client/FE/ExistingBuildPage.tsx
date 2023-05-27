@@ -4,8 +4,7 @@ import TextComponent from '../Assets/TextComponent';
 import ButtonComponent from '../Assets/ButtonComponent'
 import {handleBuild} from '../BE/ExistingBuildPage';
 
-const ExistingBuildPage = ({ route, navigation }) => {
-  const { selectedLegoSet } = route.params;
+const ExistingBuildPage = ({ navigation }) => {
 
   return (
     <View style={styles.container}>

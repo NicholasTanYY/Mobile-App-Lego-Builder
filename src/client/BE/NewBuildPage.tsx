@@ -1,23 +1,6 @@
 import axios from 'axios';
 
-export type LegoSet = {
-  last_modified_dt: string;
-  name: string;
-  num_parts: number;
-  set_img_url: string;
-  set_num: string;
-  set_url: string;
-  theme_id: number;
-  year: number;
-};
-
-export const handleSearchBuild = async (legoID, setLegoSets, navigation) => {
-  setLegoSets([]); // Clear the state
-  const newLegoSet = await fetchLegoSet(legoID);
-  setLegoSets([newLegoSet]); // Set the state with new data
-};
-
-export const fetchLegoSet = async legoID => {
+export const handleSearchBuild = async (legoID, setLegoSet, navigation) => {
   const resp = await axios.get(
     `https://rebrickable.com/api/v3/lego/sets/${legoID}`,
     {
@@ -26,12 +9,10 @@ export const fetchLegoSet = async legoID => {
       },
     },
   );
-  const setDetails = resp.data;
-  return setDetails;
+  setLegoSet(resp.data); // Set the state with new data
 };
 
 export const handleAddBuild = async (selectedLegoSet, navigation) => {
-  if (!selectedLegoSet) return;
-  alert('Confirm your build for Lego set ' + selectedLegoSet.set_num + '?');
-  navigation.navigate('Existing Build', { selectedLegoSet });
+  // Code to add to DB
+  navigation.navigate('Existing Build');
 };

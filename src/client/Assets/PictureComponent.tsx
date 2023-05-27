@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 
-const ProfilePictureComponent = ({source}) => {
+const PictureComponent = ({source}) => {
   const defaultImage = "https://media.fds.fi/product_image/500/121RoomCopenhagen_iso_TH.jpg";
 
   return (
@@ -24,4 +24,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfilePictureComponent;
+export default PictureComponent;
