@@ -4,7 +4,8 @@ import TextComponent from '../Assets/TextComponent';
 import ButtonComponent from '../Assets/ButtonComponent'
 import {handleBuild} from '../BE/ExistingBuildPage';
 
-const ExistingBuildPage = ({navigation}) => {
+const ExistingBuildPage = ({ route, navigation }) => {
+  const { selectedLegoSet } = route.params;
 
   return (
     <View style={styles.container}>
@@ -15,12 +16,11 @@ const ExistingBuildPage = ({navigation}) => {
 };
 
 export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
-
 
 export default ExistingBuildPage;
