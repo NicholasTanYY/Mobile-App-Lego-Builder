@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { PORT } from '@env';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const handleSearchBuild = async (legoID, setLegoSet, navigation) => {
   const resp = await axios.get(
@@ -13,6 +15,12 @@ export const handleSearchBuild = async (legoID, setLegoSet, navigation) => {
 };
 
 export const handleAddBuild = async (selectedLegoSet, navigation) => {
-  // Code to add to DB
+  let username = await AsyncStorage.getItem("userData");
+  const resp = await axios.post(`http://10.0.2.2:${PORT}/api/addBuild`, {username, selectedLegoSet});
+  if (resp.data.error) {
+    alert(resp.data.error);
+    return;
+  }
+  alert("Build added");
   navigation.navigate('Existing Build');
 };
