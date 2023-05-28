@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ADMIN_USERNAME, ADMIN_PASSWORD, PORT } from '@env';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const handleLogin = async (username, password, navigation) => {
   if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
@@ -14,6 +15,7 @@ export const handleLogin = async (username, password, navigation) => {
     alert(resp.data.error);
     return;
   }
+  AsyncStorage.setItem("userData", username);
   navigation.navigate('Main');
   return;
 };

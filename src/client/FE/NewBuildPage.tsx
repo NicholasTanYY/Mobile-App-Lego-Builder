@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import ButtonComponent from '../Assets/ButtonComponent';
 import TextInputComponent from '../Assets/TextInputComponent';
 import { handleSearchBuild, handleAddBuild } from '../BE/NewBuildPage';
-import { DisplayLegoSetComponent } from '../Assets/DisplayLegoSetComponent';
+import DisplayLegoSetComponent from '../Assets/DisplayLegoSetComponent';
 
 const NewBuildPage = ({ navigation }) => {
   const [legoID, setlegoID] = useState('');
@@ -21,7 +21,7 @@ const NewBuildPage = ({ navigation }) => {
             </View>
         </View>
           {legoSet 
-          ? <DisplayLegoSetComponent legoSet={legoSet} setSelectedLegoSet={setSelectedLegoSet} />
+          ? <DisplayLegoSetComponent legoSet={legoSet} func={setSelectedLegoSet} />
           : null}
       <ButtonComponent text="Create Build!" func={() => handleAddBuild(selectedLegoSet, navigation)} />
     </View>
