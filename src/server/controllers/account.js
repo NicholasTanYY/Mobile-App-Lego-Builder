@@ -18,6 +18,10 @@ export const login = async (req, res) => {
 export const signup = async (req, res) => {
     try {
         const { username, password } = req.body;
+        const checkUser = await Users.findOne({username:username});
+        if (checkUser) {
+            return res.json({error: "Username already taken!"});
+        }
         const user = await Users.create({username:username, password:password});
         if (!user) {
             return res.json({error: "An error occured."});
@@ -31,32 +35,18 @@ export const signup = async (req, res) => {
     }
 };
 
-export const addBuild = async (req, res) => {
+export const deleteAccount = async (req, res) => {
     try {
-        const { username, selectedLegoSet } = req.body;
-        const result = await Users.updateOne({username:username}, {$push:{collections:selectedLegoSet}});
+        const { username } = req.body;
+        const result = await Users.deleteOne({username:username});
         if (!result) {
-            return res.json({error: "An error occured."})
+            return res.json({error: "No account"});
         }
-        res.json({
-            data: "Add build successful."
+        return res.json({
+            data: "Delete successful"
         });
     } catch (err) {
         console.log(err);
         return res.status(400).send("Error. Try again.");
-    }
-}
-
-export const getExistingCollection = async (req, res) => {
-    try {
-        const { username } = req.body;
-        const result = await Users.findOne({username:username}, 'collections');
-        if (!result) {
-            return res.json({error: "An error occured."})
-        }
-        return res.json(result);
-    } catch (err) {
-        console.log(err);
-        return res.status(400).send("Error. Try again.");
-    }
+    }    
 }
