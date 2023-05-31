@@ -77,16 +77,5 @@ Lego pieces come in several shapes, sizes and colour. Creating a good lego datas
 
 ### To run the project
 
-In the server directory,
-
-- Create an .env file to define the port and DB connection.
-- npm i
-- npm start
-  This starts a local server to run HTTP requests and connect to the DB.
-
-In the main root directory,
-
-- Create an .env file to define the port and admin details.
-- npm i
-- npx react-native start
-- npx react-native run-android
+https://drive.google.com/file/d/1Ox1fzK6-8EoG5iF6sq7mGpHaZtKJsdXu/view?usp=sharing
+Download this APK file.
