@@ -1,7 +1,7 @@
 import express from 'express';
 import authRoutes from './routes/auth';
 
-require("dotenv").config();
+require("dotenv").config({ path: '../../.env' });
 const mongoose = require("mongoose");
 const cors = require('cors');
 const app = express();
