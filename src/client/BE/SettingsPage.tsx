@@ -1,6 +1,6 @@
 import { Linking, Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { PORT } from '@env';
+import { SERVER } from '@env';
 import axios from "axios";
 
 export const handleChangeProfilePicture = () => {
@@ -23,7 +23,7 @@ export const deleteAccount = (navigation) => {
           style: 'destructive',
           onPress: async () => {
             const username = await AsyncStorage.getItem("userData");
-            const resp = await axios.post(`http://10.0.2.2:${PORT}/api/deleteAccount`, {username});
+            const resp = await axios.post(`${SERVER}/api/deleteAccount`, {username});
             if (resp.data.error) {
               alert(resp.data.error);
               return;

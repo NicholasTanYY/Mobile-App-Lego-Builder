@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ADMIN_USERNAME, ADMIN_PASSWORD, PORT } from '@env';
+import { ADMIN_USERNAME, ADMIN_PASSWORD, SERVER } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const handleLogin = async (username, password, navigation) => {
@@ -7,7 +7,7 @@ export const handleLogin = async (username, password, navigation) => {
     navigation.navigate('Main');
     return;
   }
-  const resp = await axios.post(`http://10.0.2.2:${PORT}/api/login`, {
+  const resp = await axios.post(`${SERVER}/api/login`, {
     username,
     password,
   });
