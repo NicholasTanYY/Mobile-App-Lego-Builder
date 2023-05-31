@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { PORT } from '@env';
+import { SERVER } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const handleSearchBuild = async (legoID, setLegoSet, navigation) => {
@@ -16,7 +16,7 @@ export const handleSearchBuild = async (legoID, setLegoSet, navigation) => {
 
 export const handleAddBuild = async (selectedLegoSet, navigation) => {
   let username = await AsyncStorage.getItem("userData");
-  const resp = await axios.post(`http://10.0.2.2:${PORT}/api/addBuild`, {username, selectedLegoSet});
+  const resp = await axios.post(`${SERVER}/api/addBuild`, {username, selectedLegoSet});
   if (resp.data.error) {
     alert(resp.data.error);
     return;

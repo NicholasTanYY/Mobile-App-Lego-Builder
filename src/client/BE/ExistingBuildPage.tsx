@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { PORT } from '@env';
+import { SERVER } from '@env';
 import axios from "axios";
 
 export const handleBuild = (selectedBuild, navigation) => {
@@ -8,7 +8,7 @@ export const handleBuild = (selectedBuild, navigation) => {
 
 export const getExistingCollection = async () => {
     const username = await AsyncStorage.getItem("userData");
-    const resp = await axios.post(`http://10.0.2.2:${PORT}/api/getExistingCollection`, {username});
+    const resp = await axios.post(`${SERVER}/api/getExistingCollection`, {username});
       if (resp.data.error) {
         alert(resp.data.error);
         return;
@@ -18,7 +18,7 @@ export const getExistingCollection = async () => {
 
 export const removeBuild = async (selectedBuild, setSelectedBuild) => {
   const username = await AsyncStorage.getItem("userData");
-  const resp = await axios.post(`http://10.0.2.2:${PORT}/api/removeBuild`, {username, selectedBuild});
+  const resp = await axios.post(`${SERVER}/api/removeBuild`, {username, selectedBuild});
     if (resp.data.error) {
       alert(resp.data.error);
       return;
