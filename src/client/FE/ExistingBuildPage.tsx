@@ -9,14 +9,21 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 const ExistingBuildPage = ({ navigation }) => {
   const [existingCollection, setExistingCollection] = useState([]);
   const [selectedBuild, setSelectedBuild] = useState();
-  
+
+  useEffect(() => {
+    return navigation.addListener("focus", () => {
+      setSelectedBuild(null);
+    });
+  }, [navigation]);
+
   useEffect(() => {
       async function set() {
           const result = await getExistingCollection();
           setExistingCollection(result);
       }
       set();
- }, [selectedBuild])
+ });
+
   return (
     <View style={styles.container}>
         <TextComponent type="textTitle" text="Existing Build Screen"/>

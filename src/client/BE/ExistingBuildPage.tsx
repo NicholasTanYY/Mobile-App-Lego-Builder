@@ -3,7 +3,10 @@ import { SERVER } from '@env';
 import axios from "axios";
 
 export const handleBuild = (selectedBuild, navigation) => {
-    navigation.navigate("Build");
+  if (!selectedBuild) {
+    return;
+  }
+  navigation.navigate("Build", {build: selectedBuild});
 }
 
 export const getExistingCollection = async () => {
@@ -17,6 +20,9 @@ export const getExistingCollection = async () => {
 }
 
 export const removeBuild = async (selectedBuild, setSelectedBuild) => {
+  if (!selectedBuild) {
+    return;
+  }
   const username = await AsyncStorage.getItem("userData");
   const resp = await axios.post(`${SERVER}/api/removeBuild`, {username, selectedBuild});
     if (resp.data.error) {
