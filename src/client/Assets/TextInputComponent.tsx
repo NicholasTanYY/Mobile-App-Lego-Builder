@@ -6,6 +6,7 @@ const TextInputComponent = ({placeholder, func, value}) => {
   return <TextInput 
             style={styles.input}
             placeholder={placeholder}
+            placeholderTextColor="#373737" 
             onChangeText={func}
             value={value}
             secureTextEntry={placeholder === "Password"

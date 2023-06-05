@@ -3,6 +3,9 @@ import { SERVER } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const handleSearchBuild = async (legoID, setLegoSet, navigation) => {
+  if (legoID == "") {
+    return;
+  }
   const resp = await axios.get(
     `https://rebrickable.com/api/v3/lego/sets/${legoID}`,
     {
@@ -15,7 +18,11 @@ export const handleSearchBuild = async (legoID, setLegoSet, navigation) => {
 };
 
 export const handleAddBuild = async (selectedLegoSet, navigation) => {
+  if (!selectedLegoSet) {
+    return;
+  }
   let username = await AsyncStorage.getItem("userData");
+  selectedLegoSet["currentPage"] = 1;
   const resp = await axios.post(`${SERVER}/api/addBuild`, {username, selectedLegoSet});
   if (resp.data.error) {
     alert(resp.data.error);

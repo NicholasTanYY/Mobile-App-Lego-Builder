@@ -1,12 +1,8 @@
 import axios from 'axios';
-import { ADMIN_USERNAME, ADMIN_PASSWORD, SERVER } from '@env';
+import { SERVER } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const handleLogin = async (username, password, navigation) => {
-  if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-    navigation.navigate('Main');
-    return;
-  }
   const resp = await axios.post(`${SERVER}/api/login`, {
     username,
     password,

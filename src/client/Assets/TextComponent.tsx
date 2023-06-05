@@ -19,10 +19,12 @@ export const styles = StyleSheet.create({
       text: {
         fontSize: 18,
         fontWeight: 'bold',
+        color: "black"
       },
       subText: {
         fontSize: 16,
         marginLeft: 16,
+        color: "black"
       },
 });
 

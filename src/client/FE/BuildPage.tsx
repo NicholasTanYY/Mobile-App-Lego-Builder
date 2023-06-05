@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import ButtonComponent from '../Assets/ButtonComponent';
-import CameraComponent from '../Assets/CameraComponent';
+import { getBuildInstructions } from '../BE/BuildPage';
+import PDF from '../Assets/PDF';
 
+const BuildPage = ({ route, navigation }) => {
+    const [build, setBuild] = useState(route.params.build);
+    const [instructions, setInstructions] = useState();
 
+    useEffect(() => {
+      const getInstructions = async () => {
+        await getBuildInstructions(build, setInstructions);
+      }
+      getInstructions();
+    }, []);
 
-const BuildPage = ({ navigation }) => {
-  
     return (
       <View style={styles.container}>
-        <View style={{flex:0.7}}>
-            <CameraComponent />
-        </View>
-        <View style={{alignItems:'center'}}>
-            <ButtonComponent text="Create Project" func={()=>{}} />
-        </View>
+          <PDF source={instructions} build={build}/>
       </View>
     );
   };
