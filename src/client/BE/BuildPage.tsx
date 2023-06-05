@@ -20,7 +20,7 @@ export const getBuildInstructions = async (build, setInstructions) => {
 export const goToPage = async (ref, build, pageNumber) => {
   ref.current.setPage(pageNumber);
   const username = await AsyncStorage.getItem("userData");
-  const resp = await axios.post(`${SERVER}/api/updateBuildPage`, {username:username, build:build, pageNumber:pageNumber});
+  const resp = await axios.post(`${SERVER}/api/updateBuildPage`, {username, build, pageNumber});
     if (resp.data.error) {
       alert(resp.data.error);
       return;
