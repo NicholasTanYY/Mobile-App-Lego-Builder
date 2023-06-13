@@ -1,11 +1,16 @@
 import Users from "../models/user";
 require("dotenv").config();
+const bcrypt = require("bcrypt");
 
 export const login = async (req, res) => {
     try {
         const { username, password } = req.body;
-        const user = await Users.findOne({username:username, password:password});
-        if (!user) {
+        const hashedPassword = await Users.findOne({username:username}, "password");
+        if (!hashedPassword) {
+            return res.json({error: "Incorrect username or password!"});
+        } 
+        const result = await bcrypt.compare(password, hashedPassword.password);
+        if (!result) {
             return res.json({error: "Incorrect username or password!"});
         }
         res.json({data: "Login successful"});
@@ -22,7 +27,8 @@ export const signup = async (req, res) => {
         if (checkUser) {
             return res.json({error: "Username already taken!"});
         }
-        const user = await Users.create({username:username, password:password});
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await Users.create({username:username, password:hashedPassword});
         if (!user) {
             return res.json({error: "An error occured."});
         }
