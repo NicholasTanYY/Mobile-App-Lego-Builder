@@ -12,14 +12,14 @@ config =  ['6632', '3022', '3062', '3068', '2357', '3045', '3010', '6143', '3390
            '3038', '14719', '3700', '3622', '15672', '3021']
 
 # Main dataset directory
-main_dir = 'working_dataset'
+main_dir = '../data/pre-processed_data/combined_dataset'
 
 # Directory to save generated images
-save_dir = 'training/datasets/coco128/'
+save_dir = '../data/object_detection_data/improved_dataset'
 os.makedirs(save_dir, exist_ok=True)
 
 # Directory where background images are stored
-bg_dir = 'backgrounds/'
+bg_dir = '../data/pre-processed_data/backgrounds/'
 
 # Load the background images
 bg_images = [cv2.imread(os.path.join(bg_dir, file)) for file in os.listdir(bg_dir) if file.endswith('.jpg')]
@@ -60,9 +60,6 @@ def augment_image(bg_img, lego_img):
     if bg_img is None:
         print(f'Failed to load image at {os.path.join(bg_dir, file)}')
 
-    # Append the bounding box coordinates to the list
-    # bounding_boxes.append((position[0], position[1], position[0]+lego_img.shape[1], position[1]+lego_img.shape[0]))
-
     # bg_img.shape[0] = height, bg_img.shape[1] = width
     # Append the bounding box coordinates to the list in the yolo format
     bounding_boxes.append([(position[0]+(lego_img.shape[1])//2)/bg_img.shape[1], 
@@ -71,63 +68,51 @@ def augment_image(bg_img, lego_img):
                            lego_img.shape[0]/bg_img.shape[0]])
     return bg_img, bounding_boxes
 
+root, dirs, files = next(os.walk(main_dir))  # Get the files in main_dir
 # Traverse each colour sub-directory
 while counter <= 50000:
-    for root, dirs, files in os.walk(main_dir):
-        if files:
-            # Decide on a random number of legos to place in the image
-            num_legos = random.randint(1, 5)
+    if files:
+        # Decide on a random number of legos to place in the image
+        num_legos = random.randint(10, 20)
 
-            # Randomly select the lego images
-            lego_images = random.sample(files, num_legos)
+        # Randomly select the lego images
+        lego_images = random.sample(files, num_legos)
 
-            # Randomly select a background image
-            bg_img = random.choice(bg_images).copy()
+        # Randomly select a background image
+        bg_img = random.choice(bg_images).copy()
 
-            # Create a list to collect bounding boxes from all legos in one image
-            all_bounding_boxes = []
-            # lego_colors = []
-            lego_names = []
+        # Create a list to collect bounding boxes from all legos in one image
+        all_bounding_boxes = []
+        lego_names = []
 
-            for file in lego_images:
-                # Load the lego brick image
-                lego_img_path = os.path.join(root, file)
-                lego_img = cv2.imread(lego_img_path, cv2.IMREAD_UNCHANGED)
+        for file in lego_images:
+            # Load the lego brick image
+            lego_img_path = os.path.join(root, file)
+            lego_img = cv2.imread(lego_img_path, cv2.IMREAD_UNCHANGED)
 
-                # # Get the color from the parent directory name
-                # lego_color = os.path.basename(os.path.dirname(lego_img_path))
-                # lego_colors.append(lego_color)
+            # Extract the lego name (number) from the file name
+            lego_name = file.split(' ')[0]
 
-                # # Extract the lego name from the file name, excluding the file extension
-                # lego_name = os.path.splitext(file)[0]
+            # Check if the lego name is in the config
+            if lego_name not in config:
+                exit()
+            
+            lego_names.append(lego_name)
 
-                # # Replace spaces in the lego name with underscores
-                # lego_name = lego_name.replace(' ', '_')
-                # lego_names.append(lego_name)
+            # Augment the image
+            bg_img, bounding_boxes = augment_image(bg_img, lego_img)
 
-                # Extract the lego name (number) from the file name
-                lego_name = file.split(' ')[0]
+            # Collect the bounding boxes
+            all_bounding_boxes.extend(bounding_boxes)
 
-                # Check if the lego name is in the config
-                if lego_name not in config:
-                    exit()
-                
-                lego_names.append(lego_name)
+        # Save the new image and its bounding boxes
+        cv2.imwrite(os.path.join(save_dir, f'images/train{counter}.jpg'), bg_img)
+        with open(os.path.join(save_dir, f'labels/train{counter}.txt'), 'w') as f:
+            idx = 0
+            for box in all_bounding_boxes:
+                f.write(f"{config.index(lego_names[idx])} {box[0]} {box[1]} {box[2]} {box[3]}\n")
+                idx += 1
 
-                # Augment the image
-                bg_img, bounding_boxes = augment_image(bg_img, lego_img)
-
-                # Collect the bounding boxes
-                all_bounding_boxes.extend(bounding_boxes)
-
-            # Save the new image and its bounding boxes
-            cv2.imwrite(os.path.join(save_dir, f'images/train{counter}.jpg'), bg_img)
-            with open(os.path.join(save_dir, f'labels/train{counter}.txt'), 'w') as f:
-                idx = 0
-                for box in all_bounding_boxes:
-                    f.write(f"{config.index(lego_names[idx])} {box[0]} {box[1]} {box[2]} {box[3]}\n")
-                    idx += 1
-
-            # Increment the counter
-            counter += 1
-            print(f'Generated {counter} images')
+        # Increment the counter
+        counter += 1
+        print(f'Generated {counter} images')
