@@ -56,3 +56,38 @@ export const deleteAccount = async (req, res) => {
         return res.status(400).send("Error. Try again.");
     }    
 }
+
+export const changeUsernameOrPassword = async (req, res) => {
+    try {
+        const {currentUsername, username, password} = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        let result;
+        if (currentUsername == username) {
+            result = await Users.updateOne({username:currentUsername}, {password:hashedPassword});
+            if (!result) {
+                return res.json({error: "Error updating account."});
+            }
+            return res.json({
+                data: "Update successful.",
+                username: username
+            });
+        } else {
+            result = await Users.findOne({username:username});
+            if (result) {
+                return res.json({error: "Username already taken."});
+            }
+            result = await Users.updateOne({username:currentUsername}, {username:username, password:hashedPassword});
+            if (!result) {
+                return res.json({error: "Error updating account."});
+            }
+            return res.json({
+                data: "Update successful.",
+                username: username
+            });
+        }
+    } catch (err) {
+        console.log(err);
+        return res.status(400).send("Error. Try again.");
+    }    
+
+}

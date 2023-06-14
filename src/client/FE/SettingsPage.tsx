@@ -7,6 +7,7 @@ import SettingsAccountComponent from '../Assets/Settings/SettingsAccountComponen
 import PictureComponent from '../Assets/PictureComponent';
 import { RootStackParamList } from '../AppNavigator';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { ScrollView } from 'react-native-gesture-handler';
 
 type SettingsPageNavigationProp = StackNavigationProp<RootStackParamList, 'Settings'>;
 type Props = {
@@ -16,12 +17,14 @@ type Props = {
 const SettingsPage = ({ navigation }: Props) => {
 
   return (
-    <View style={styles.container}>
-      <PictureComponent />
-      <SettingsAccountComponent navigation={navigation} />
-      <SettingsVolumeComponent />
-      <ButtonComponent text="Open Settings" func={openPhoneSettings} />
-    </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <PictureComponent />
+          <SettingsAccountComponent navigation={navigation} />
+          <SettingsVolumeComponent />
+          <ButtonComponent text="Open Settings" func={openPhoneSettings} />
+        </View>
+      </ScrollView>
   );
 };
 
