@@ -6,7 +6,17 @@ import axios from "axios";
 export const handleChangeProfilePicture = () => {
 }
 
-export const handleChangeUsernameOrPassword = () => {
+export const handleChangeUsernameOrPassword = async (username, password, setModalState) => {
+  const currentUsername = await AsyncStorage.getItem("userData");
+  const resp = await axios.post(`${SERVER}/api/changeUsernameOrPassword`, {currentUsername, username, password});
+  if (resp.data.error) {
+    alert(resp.data.error);
+    return;
+  }
+  await AsyncStorage.setItem("userData", resp.data.username);
+  alert("Username/Password changed!");
+  setModalState(false);
+  return;
 }
 
 export const deleteAccount = (navigation) => {

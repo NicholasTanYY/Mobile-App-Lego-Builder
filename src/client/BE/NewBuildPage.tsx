@@ -7,7 +7,7 @@ export const handleSearchBuild = async (legoID, setLegoSet, navigation) => {
     return;
   }
   const resp = await axios.get(
-    `https://rebrickable.com/api/v3/lego/sets/${legoID}`,
+    `https://rebrickable.com/api/v3/lego/sets/${legoID}-1`,
     {
       headers: {
         Authorization: `key 5513bf7824a3a30f9281f898490e97dc`,

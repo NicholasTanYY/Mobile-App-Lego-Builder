@@ -19,7 +19,7 @@ export const DisplayLegoSetComponent = ({legoSet, func}) => {
         <View style={styles.box}>
             <TouchableOpacity onPress={() => func(legoSet)}>
                 <TextComponent type="text" text={"Name: " + legoSet.name}/>
-                <TextComponent type="text" text={"Set ID: " + legoSet.set_num}/>
+                <TextComponent type="text" text={"Set ID: " + legoSet.set_num.slice(0, -2)}/>
                 <TextComponent type="text" text={"Year: " + legoSet.year}/>
                 <TextComponent type="text" text={"Number of pieces: " + legoSet.num_parts}/>
                 <PictureComponent source={legoSet.set_img_url} />
