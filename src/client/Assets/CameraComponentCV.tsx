@@ -1,24 +1,10 @@
 import 'react-native-reanimated';
 import React, { useEffect, useState, useRef } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Platform,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import { Camera, useCameraDevices } from 'react-native-vision-camera';
-// import { RNCamera, RNCameraProps } from 'react-native-camera';
 import { useIsFocused } from '@react-navigation/native';
-import { drawRect } from './ComputerVision/utilities';
 import ButtonComponent from './ButtonComponent';
-// import * as tf from '@tensorflow/tfjs';
-// import {
-//   fetch,
-//   bundleResourceIO,
-//   // cameraWithTensors,
-// } from '@tensorflow/tfjs-react-native';
+import { invokeLambdaFunction, imageToBase64 } from './HandleLambdaFunction';
 
 const CameraComponent = () => {
   const camera = useRef<Camera | null>(null);
@@ -26,36 +12,11 @@ const CameraComponent = () => {
   const devices = useCameraDevices();
   const device = devices.back;
   const isFocused = useIsFocused();
-  // const [word, setWord] = useState('');
-  // const [predictionFound, setPredictionFound] = useState(false);
   const [showCamera, setShowCamera] = useState(true);
-  const [capturedImage, setCapturedImage] = useState('');
-  // const [legoIdentifierModel, setlegoIdentifierModel] =
-  //   useState<tf.LayersModel | null>(null);
-  let requestAnimationFrameId = 0;
-  const textureDims =
-    Platform.OS === 'ios'
-      ? { width: 1080, height: 1920 }
-      : { width: 1600, height: 1200 };
-  const tensorDims = { width: 152, height: 200 };
+  const [imagePath, setImagePath] = useState('');
+  const [photoBase64, setPhotoBase64] = useState('');
 
   useEffect(() => {
-    // async function loadModel() {
-    //   console.log('[+] Application started');
-    //   //Wait for tensorflow module to be ready
-    //   const tfReady = await tf.ready();
-    //   console.log('[+] Loading custom lego detection model');
-    //   const modelJson = await require('../../../assets/model/model.json');
-    //   const modelWeight =
-    //     await require('../../../assets/model/group1-shard.bin');
-    //   const legoIdentifierModel = await tf.loadLayersModel(
-    //     bundleResourceIO(modelJson, modelWeight),
-    //   );
-    //   setlegoIdentifierModel(legoIdentifierModel);
-    //   console.log('[+] Model Loaded');
-    // }
-    // loadModel();
-
     const requestCameraPermission = async () => {
       const status = await Camera.requestCameraPermission();
       setHasPermission(status === 'authorized');
@@ -63,47 +24,37 @@ const CameraComponent = () => {
     requestCameraPermission();
   }, []);
 
-  // const getPrediction = async tensor => {
-  //   if (!tensor || !legoIdentifierModel) {
-  //     return;
-  //   }
-
-  //   const prediction = await (legoIdentifierModel.predict(tensor) as tf.Tensor);
-  //   console.log(`prediction: ${JSON.stringify(prediction)}`);
-
-  //   if (!prediction || prediction.size === 0) {
-  //     cancelAnimationFrame(requestAnimationFrameId);
-  //     console.log('no predictions found');
-  //     setPredictionFound(false);
-  //     return;
-  //   } else {
-  //     setPredictionFound(true);
-  //   }
-  // };
+  function handlePhoto() {
+    capturePhoto();
+    renderProcessedImage();
+  }
 
   const capturePhoto = async () => {
     if (camera.current !== null) {
       const photo = await camera.current.takePhoto({});
-      setCapturedImage(photo.path);
+      const imageBase64Data = await imageToBase64(photo.path);
+      setPhotoBase64(imageBase64Data);
+      setImagePath(photo.path);
       setShowCamera(false);
       console.log('photo saved to ' + photo.path);
     }
   };
 
-  // const handleCameraStream = imageAsTensors => {
-  //   const loop = async () => {
-  //     const nextImageTensor = await imageAsTensors.next().value;
-  //     await getPrediction(nextImageTensor);
-  //     requestAnimationFrameId = requestAnimationFrame(loop);
-  //   };
-  //   loop();
-  // };
+  const renderProcessedImage = async () => {
+    const processedImage = await invokeLambdaFunction(photoBase64);
+    setPhotoBase64(processedImage);
 
-  useEffect(() => {
-    return () => {
-      cancelAnimationFrame(requestAnimationFrameId);
-    };
-  }, [requestAnimationFrameId]);
+    // invokeLambdaFunction(photoBase64)
+    //   .then(response => {
+    //     // Handle the response from the Lambda function
+    //     console.log('Lambda function response:', response);
+    //     // Process the response and draw bounding boxes in your React Native app
+    //   })
+    //   .catch(error => {
+    //     // Handle any errors that occur during the invocation
+    //     console.error('Error invoking Lambda function:', error);
+    //   });
+  };
 
   return device != null && hasPermission && isFocused ? (
     showCamera ? (
@@ -114,19 +65,21 @@ const CameraComponent = () => {
           device={device}
           isActive={showCamera}
           photo={true}
+          enableAutoStabilization={true}
+          qualityPrioritization={'quality'}
         />
 
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.camButton}
-            onPress={() => capturePhoto()}
+            onPress={() => handlePhoto()}
           />
         </View>
       </>
     ) : (
       <View style={StyleSheet.absoluteFill}>
         <Image
-          source={{ uri: `file://'${capturedImage}` }}
+          source={{ uri: `data:image/jpg;base64,${photoBase64}` }}
           style={StyleSheet.absoluteFill}
         />
         <ButtonComponent text="Retake" func={() => setShowCamera(true)} />

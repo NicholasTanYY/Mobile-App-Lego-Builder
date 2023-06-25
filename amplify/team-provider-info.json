@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-orbitaltss-dev-151504-authRole",
+      "UnauthRoleArn": "arn:aws:iam::694077684415:role/amplify-orbitaltss-dev-151504-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::694077684415:role/amplify-orbitaltss-dev-151504-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-orbitaltss-dev-151504-deployment",
+      "UnauthRoleName": "amplify-orbitaltss-dev-151504-unauthRole",
+      "StackName": "amplify-orbitaltss-dev-151504",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:694077684415:stack/amplify-orbitaltss-dev-151504/02973e70-1328-11ee-b825-0ad26e6eea0a",
+      "AmplifyAppId": "d31sdmaikpsypt"
+    },
+    "categories": {
+      "function": {
+        "OrbitalLegoDetection": {}
+      }
+    }
+  }
+}
