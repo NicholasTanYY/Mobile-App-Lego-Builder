@@ -111,6 +111,9 @@ Our product should enable the user of the mobile application to:
 2. Give the app proper styling with Lego-based components to make the Lego building experience more immersive
 3. Improve the accuracy and reliability of the Computer Vision model
 
+### User Testing
+1. User Testing: https://docs.google.com/document/d/1KOl9hAJPEdQePmJ93Pbw-kRJU55sYLqRbEh7e0U-pvI/edit?usp=sharing
+
 ### Other Computer Vision files
 
 1. Google Colab file for training the Computer Vision model:
