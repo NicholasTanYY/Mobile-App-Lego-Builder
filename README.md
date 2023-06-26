@@ -121,12 +121,12 @@ Our product should enable the user of the mobile application to:
 ### Instructions to run the project
 
 1. Download this APK file on an Android device. \
-   https://drive.google.com/file/d/1Ox1fzK6-8EoG5iF6sq7mGpHaZtKJsdXu/view?usp=sharing (to change)
-2. Logging in as a new or existing user: \
+   https://drive.google.com/drive/folders/1MHNi03Pa6CElFJfwn4J6-Pfsvk49woRm?usp=sharing
+3. Logging in as a new or existing user: \
    Signup for a new account and login. (If it takes a while, do wait a few minutes as the server we're hosting with needs time to start once the first request comes in :'> )
-3. Creating a new build based on Lego ID: \
+4. Creating a new build based on Lego ID: \
    Enter the 'New Build' tab and search for any Lego set based on their ID. Here are some Lego IDs to try out: 76258, 10323, 21057. Press the build to select, then press 'Create Build!' to enter the Existing Build Page.
-4. Select the desired build from the list of existing builds: \
+5. Select the desired build from the list of existing builds: \
    Press onto the build you want to work on and press 'Let's start building!' to enter the Build page.
-5. Navigating the Build Page: \
+6. Navigating the Build Page: \
    You can browse the PDF at the top half of the screen. When required, open the camera and take a photo of the pile of Lego bricks in front of you by pressing the white circle button. Our model will return an image with appended bounding boxes, showing you the Lego pieces required at this page of the PDF.
