@@ -122,6 +122,7 @@ Our product should enable the user of the mobile application to:
 
 1. Download this APK file on an Android device. \
    https://drive.google.com/drive/folders/1MHNi03Pa6CElFJfwn4J6-Pfsvk49woRm?usp=sharing
+2. Do enable permissions to download this unknown file from android.
 3. Logging in as a new or existing user: \
    Signup for a new account and login. (If it takes a while, do wait a few minutes as the server we're hosting with needs time to start once the first request comes in :'> )
 4. Creating a new build based on Lego ID: \
