@@ -4,7 +4,11 @@ import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import { Camera, useCameraDevices } from 'react-native-vision-camera';
 import { useIsFocused } from '@react-navigation/native';
 import ButtonComponent from './ButtonComponent';
-import { invokeLambdaFunction, imageToBase64 } from './HandleLambdaFunction';
+import {
+  invokeLambdaFunction,
+  imageToBase64,
+  ImageConverterAPI,
+} from './HandleLambdaFunction';
 
 const CameraComponent = () => {
   const camera = useRef<Camera | null>(null);
@@ -41,8 +45,12 @@ const CameraComponent = () => {
   };
 
   const renderProcessedImage = async () => {
-    const processedImage = await invokeLambdaFunction(photoBase64);
-    setPhotoBase64(processedImage);
+    try {
+      const processedBase64Img = await ImageConverterAPI(photoBase64);
+      setPhotoBase64(processedBase64Img);
+    } catch (error) {
+      console.error('Error converting image:', error);
+    }
 
     // invokeLambdaFunction(photoBase64)
     //   .then(response => {

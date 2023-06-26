@@ -36,6 +36,10 @@ Our folders are organised as per the following:
 
 ![High Level Overview](High_Level_Overview.png)
 
+### Logic Flow Diagram
+
+![Logic Flow Diagram](Logic_Flow_Diagram.png)
+
 ### User stories
 
 Our product should enable the user of the mobile application to:
