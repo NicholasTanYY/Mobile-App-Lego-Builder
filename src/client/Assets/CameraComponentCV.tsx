@@ -11,7 +11,7 @@ import {
 } from './HandleLambdaFunction';
 
 const CameraComponent = () => {
-  const camera = useRef<Camera | null>(null);
+  const camera = useRef<Camera>();
   const [hasPermission, setHasPermission] = useState(false);
   const devices = useCameraDevices();
   const device = devices.back;

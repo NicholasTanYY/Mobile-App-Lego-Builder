@@ -3,29 +3,23 @@ import { View, StyleSheet } from 'react-native';
 import TextComponent from '../TextComponent';
 import PlayButtonComponent from '../PlayButtonComponent';
 import Slider from '@react-native-community/slider';
-import { handlePlayPause, handleVolumeChange } from '../../BE/SettingsPage';
+import { handlePlayPause, handleVolumeChange } from '../../BE/MusicSettings';
 import TrackPlayer, { State } from 'react-native-track-player';
-import { setupPlayer, addTracks } from './TrackPlayerServices';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SettingsVolumeComponent = () => {
   const [volumeSlider, setVolumeSlider] = useState(50);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isPlayerReady, setIsPlayerReady] = useState(false);
+  const [isPlaying, setIsPlaying] = useState<Boolean>();
 
   useEffect(() => {
-    async function setup() {
-      let isSetup = await setupPlayer();
-
-      const queue = await TrackPlayer.getQueue();
-      if (isSetup && queue.length <= 0) {
-        await addTracks();
+    async function checkMusic() {
+      const isPlayingRightNow = await TrackPlayer.getState()
+      if (isPlayingRightNow == State.Playing) {
+        setIsPlaying(true);
+      } else {
+        setIsPlaying(false);
       }
-
-      setIsPlayerReady(isSetup);
     }
-
-    setup();
+    checkMusic();
   }, []);
 
   return (

@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
         width: '80%',
         height: 50,
         margin:16,
+        color:"black",
         paddingHorizontal: 12,
         borderWidth: 1,
         borderColor: '#ccc',
