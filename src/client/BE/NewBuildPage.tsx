@@ -6,15 +6,21 @@ export const handleSearchBuild = async (legoID, setLegoSet, navigation) => {
   if (legoID == "") {
     return;
   }
-  const resp = await axios.get(
-    `https://rebrickable.com/api/v3/lego/sets/${legoID}-1`,
-    {
-      headers: {
-        Authorization: `key 5513bf7824a3a30f9281f898490e97dc`,
+  let resp;
+  try {
+    resp = await axios.get(
+      `https://rebrickable.com/api/v3/lego/sets/${legoID}-1`,
+      {
+        headers: {
+          Authorization: `key 5513bf7824a3a30f9281f898490e97dc`,
+        },
       },
-    },
-  );
-  setLegoSet(resp.data); // Set the state with new data
+    );
+    setLegoSet(resp.data); // Set the state with new data
+  } catch {
+    alert("Cannot find build :<");
+    navigation.navigate("New Build");
+  }
 };
 
 export const handleAddBuild = async (selectedLegoSet, navigation) => {

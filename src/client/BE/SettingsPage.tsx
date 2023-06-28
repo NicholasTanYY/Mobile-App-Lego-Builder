@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SERVER } from '@env';
 import axios from 'axios';
 import { set } from 'react-native-reanimated';
+import { setBackgroundMusic } from './MusicSettings';
 
 export const handleChangeProfilePicture = () => {};
 
@@ -55,28 +56,6 @@ export const deleteAccount = navigation => {
       },
     ],
   );
-};
-
-export const handlePlayPause = async (
-  isPlaying,
-  setIsPlaying,
-  TrackPlayer,
-  State,
-) => {
-  if ((await TrackPlayer.getState()) == State.Playing) {
-    TrackPlayer.pause();
-  } else {
-    TrackPlayer.play();
-  }
-  setIsPlaying(!isPlaying);
-  // console.log(isPlaying ? 'paused' : 'playing');
-};
-
-export const handleVolumeChange = async (value, setFunc, TrackPlayer) => {
-  let volume = Math.round(value);
-  setFunc(volume);
-  await TrackPlayer.setVolume(volume / 100);
-  // console.log('volume: ' + volume);
 };
 
 export const openPhoneSettings = async () => {

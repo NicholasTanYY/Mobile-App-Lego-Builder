@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { HeaderBackButton } from '@react-navigation/elements';
 import 'react-native-gesture-handler';
 import HomePage from './FE/HomePage';
 import LoginPage from './FE/LoginPage';
@@ -11,6 +12,8 @@ import MainPage from './FE/MainPage';
 import NewBuildPage from './FE/NewBuildPage';
 import ExistingBuildPage from './FE/ExistingBuildPage';
 import BuildPage from './FE/BuildPage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { pauseMusic } from './BE/MusicSettings';
 
 export type RootStackParamList = {
   Home: undefined,
@@ -36,7 +39,14 @@ const AppNavigator = () => {
           <Stack.Screen name="Settings" component={SettingsPage} />
           <Stack.Screen name="FAQ" component={FAQPage} />
           <Stack.Screen name="Sign up" component={SignupPage} />
-          <Stack.Screen name="Main" component={MainPage} />
+          <Stack.Screen name="Main" component={MainPage} 
+              options={({ navigation, route }) => ({ 
+                headerLeft: props => (
+                    <HeaderBackButton {...props} onPress={() => {
+                            navigation.navigate('Home');
+                        }} />
+                )
+              })} />
           <Stack.Screen name="New Build" component={NewBuildPage} />
           <Stack.Screen name="Existing Build" component={ExistingBuildPage} />
           <Stack.Screen name="Build" component={BuildPage} />
