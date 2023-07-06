@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { getBuildInstructions, openCloseCamera } from '../BE/BuildPage';
 import PDF from '../Assets/PDF';
-import CameraComponent from '../Assets/CameraComponentCV';
+import CameraComponent from '../Assets/CameraComponentBarcodes';
 import ButtonComponent from '../Assets/ButtonComponent';
 
 const BuildPage = ({ route, navigation }) => {
