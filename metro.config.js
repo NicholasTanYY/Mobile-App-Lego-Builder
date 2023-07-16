@@ -31,7 +31,7 @@ module.exports = (async () => {
       }),
     },
     resolver: {
-      assetExts: [...assetExts, 'bin'],
+      assetExts: [...assetExts, 'bin', 'tflite'],
     },
   };
 })();

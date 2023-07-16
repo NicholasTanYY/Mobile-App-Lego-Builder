@@ -1,4 +1,33 @@
 {
   "migIndex": 1,
-  "data": []
+  "data": [
+    {
+      "path": "assets/model/group1-shard.bin",
+      "sha1": "dff5077b61747488181389c0e4c0b43443abd789"
+    },
+    {
+      "path": "assets/model/lite-model_efficientdet_lite3_detection_metadata_1.tflite",
+      "sha1": "cdd483da9944a0959e420aceffcd062e834f4436"
+    },
+    {
+      "path": "assets/model/M1_float16.tflite",
+      "sha1": "ac3bc530e5a46a086c9f5e59fc15b513431cf3c0"
+    },
+    {
+      "path": "assets/model/M1_float32.tflite",
+      "sha1": "52f97e13b0d713d14c8f91002b4498d01af7e942"
+    },
+    {
+      "path": "assets/model/M1_float33.tflite",
+      "sha1": "091bf0a600c9cbad4c55cc37572f64a898bd40f7"
+    },
+    {
+      "path": "assets/model/model.json",
+      "sha1": "9e2010f8cf8739ea5d3f8f13ef9f80d293737226"
+    },
+    {
+      "path": "assets/model/yolov8n_float16.tflite",
+      "sha1": "8520df8f9fe41ef4b43f66f4ee4893b9d718347f"
+    }
+  ]
 }

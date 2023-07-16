@@ -13,13 +13,13 @@ const CameraComponent = () => {
   const isFocused = useIsFocused();
 
   const frameProcessorConfig: FrameProcessorConfig = {
-    modelFile: `../../../assets/model/M1_float16.tflite`, // <!-- name and extension of your model
+    modelFile: `M1_float32.tflite`, // <!-- name and extension of your model
     scoreThreshold: 0.5,
   };
   const frameProcessor = useFrameProcessor((frame) => {
     'worklet';
     const detectedObjects: DetectedObject[] = detectObjects(frame, frameProcessorConfig);
-    alert(detectedObjects);
+    console.log(detectedObjects);
   }, []);
   
   useEffect(() => {
