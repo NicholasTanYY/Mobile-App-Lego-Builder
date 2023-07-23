@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, ImageBackground } from 'react-native';
 import ButtonComponent from '../Assets/ButtonComponent';
 import TextInputComponent from '../Assets/TextInputComponent';
 import { handleSearchBuild, handleAddBuild } from '../BE/NewBuildPage';
 import DisplayLegoSetComponent from '../Assets/DisplayLegoSetComponent';
+import { set } from 'react-native-reanimated';
 
 const NewBuildPage = ({ navigation }) => {
   const [legoID, setlegoID] = useState('');
   const [legoSet, setLegoSet] = useState();
   const [selectedLegoSet, setSelectedLegoSet] = useState();
+
+  useEffect(() => {
+    setSelectedLegoSet(null);
+  }, [legoID]);
 
   return (
     <ImageBackground
