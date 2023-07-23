@@ -1,7 +1,7 @@
 export const FAQquestions = [
   {
     id: 1,
-    question: 'What is BuildSquad?',
+    question: 'What is Build Squad?',
     description:
       'BuildSquad is a mobile application built by a group of NUS students who are interested in Legos. \
       The application helps you simplify the process of building your Legos so that you can focus on the hands-on beauty of building your Lego.',

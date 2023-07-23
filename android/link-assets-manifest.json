@@ -2,12 +2,28 @@
   "migIndex": 1,
   "data": [
     {
-      "path": "assets/model/group1-shard.bin",
-      "sha1": "dff5077b61747488181389c0e4c0b43443abd789"
+      "path": "assets/fonts/LondrinaSolid-Black.ttf",
+      "sha1": "d50fb384e6a9816b7026723b75c9b989f8deacae"
     },
     {
-      "path": "assets/model/lite-model_efficientdet_lite3_detection_metadata_1.tflite",
-      "sha1": "cdd483da9944a0959e420aceffcd062e834f4436"
+      "path": "assets/fonts/LondrinaSolid-Light.ttf",
+      "sha1": "24a7061226ccbdf99d2995b18b3e854853e67f95"
+    },
+    {
+      "path": "assets/fonts/LondrinaSolid-Regular.ttf",
+      "sha1": "3f8b03eb2732f1b618b7339a32f5f7e1f6897756"
+    },
+    {
+      "path": "assets/fonts/LondrinaSolid-Thin.ttf",
+      "sha1": "a4325155262ae62234ead68716cdd0aea6bda845"
+    },
+    {
+      "path": "assets/fonts/OFL.txt",
+      "sha1": "b34daf0bbe69f0640762570de07060b59ec1800e"
+    },
+    {
+      "path": "assets/model/group1-shard.bin",
+      "sha1": "dff5077b61747488181389c0e4c0b43443abd789"
     },
     {
       "path": "assets/model/M1_float16.tflite",
@@ -16,10 +32,6 @@
     {
       "path": "assets/model/M1_float32.tflite",
       "sha1": "52f97e13b0d713d14c8f91002b4498d01af7e942"
-    },
-    {
-      "path": "assets/model/M1_float33.tflite",
-      "sha1": "091bf0a600c9cbad4c55cc37572f64a898bd40f7"
     },
     {
       "path": "assets/model/model.json",
