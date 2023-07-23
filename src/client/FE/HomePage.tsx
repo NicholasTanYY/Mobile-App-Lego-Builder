@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ImageBackground } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../AppNavigator';
 import ButtonComponent from '../Assets/ButtonComponent';
@@ -15,7 +15,7 @@ type Props = {
   navigation: HomePageNavigationProp;
 };
 
-const HomePage = ({navigation}: Props) => {
+const HomePage = ({ navigation }: Props) => {
   const isFocused = useIsFocused();
 
   useEffect(() => {
@@ -32,21 +32,30 @@ const HomePage = ({navigation}: Props) => {
   }, [isFocused]);
 
   return (
-    <View style={styles.container}>
-      <TextComponent type="textTitle" text="Welcome to the Home Screen!" />
-      <ButtonComponent text="Login" func={() => handleLogin(navigation)} />
-      <ButtonComponent text="Signup" func={() => handleSignup(navigation)} />
-      <ButtonComponent text="FAQ" func={() => handleFAQ(navigation)} />
-    </View>
+    <ImageBackground
+      source={require('../Assets/images/lego_border.jpg')}
+      style={styles.background_img}>
+      <View style={styles.container}>
+        <TextComponent type="textTitle" text="BUILD SQUAD" />
+        <ButtonComponent text="Login" func={() => handleLogin(navigation)} />
+        <ButtonComponent text="Signup" func={() => handleSignup(navigation)} />
+        <ButtonComponent text="FAQ" func={() => handleFAQ(navigation)} />
+      </View>
+    </ImageBackground>
   );
 };
 
 export const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  background_img: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
 });
 
 export default HomePage;

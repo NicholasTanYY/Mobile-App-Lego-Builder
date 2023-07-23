@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground, StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet } from 'react-native';
 
 export const LegoBorderBackground = ({ props }) => {
   return (
