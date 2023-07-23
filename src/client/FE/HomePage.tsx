@@ -36,7 +36,7 @@ const HomePage = ({ navigation }: Props) => {
       source={require('../Assets/images/lego_border.jpg')}
       style={styles.background_img}>
       <View style={styles.container}>
-        <TextComponent type="textTitle" text="BUILD SQUAD" />
+        <TextComponent type="mainHeading" text="BUILD SQUAD" />
         <ButtonComponent text="Login" func={() => handleLogin(navigation)} />
         <ButtonComponent text="Signup" func={() => handleSignup(navigation)} />
         <ButtonComponent text="FAQ" func={() => handleFAQ(navigation)} />

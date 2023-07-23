@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ImageBackground } from 'react-native';
 import ButtonComponent from '../Assets/ButtonComponent';
 import { openPhoneSettings } from '../BE/SettingsPage';
 import SettingsVolumeComponent from '../Assets/Settings/SettingsVolumeComponent';
@@ -19,14 +19,18 @@ type Props = {
 
 const SettingsPage = ({ navigation }: Props) => {
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <PictureComponent />
-        <SettingsAccountComponent navigation={navigation} />
-        <SettingsVolumeComponent />
-        <ButtonComponent text="Open Settings" func={openPhoneSettings} />
-      </View>
-    </ScrollView>
+    <ImageBackground
+      source={require('../Assets/images/white_lego.jpg')}
+      style={styles.background_img}>
+      <ScrollView>
+        <View style={styles.container}>
+          <PictureComponent />
+          <SettingsAccountComponent navigation={navigation} />
+          <SettingsVolumeComponent />
+          <ButtonComponent text="Open Settings" func={openPhoneSettings} />
+        </View>
+      </ScrollView>
+    </ImageBackground>
   );
 };
 
@@ -36,6 +40,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 20,
+  },
+  background_img: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });
 

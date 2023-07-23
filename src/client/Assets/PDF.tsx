@@ -41,11 +41,10 @@ export const PDF = ({ source, build }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: {},
   pdf: {
-    height: '40%',
+    height: '80%',
+    // backgroundColor: 'white',
   },
 });
 

@@ -2,7 +2,9 @@ import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 
 const TextComponent = ({ type, text }) => {
-  return type == 'textTitle' ? (
+  return type == 'mainHeading' ? (
+    <Text style={styles.mainHeading}>{text}</Text>
+  ) : type == 'textTitle' ? (
     <Text style={styles.textTitle}>{text}</Text>
   ) : type == 'text' ? (
     <Text style={styles.text}>{text}</Text>
@@ -12,6 +14,13 @@ const TextComponent = ({ type, text }) => {
 };
 
 export const styles = StyleSheet.create({
+  mainHeading: {
+    fontFamily: 'monospace',
+    fontSize: 38,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: 'black',
+  },
   textTitle: {
     // fontFamily: 'LondrinaSolid-Regular',
     fontFamily: 'monospace',
@@ -21,6 +30,7 @@ export const styles = StyleSheet.create({
     color: 'black',
   },
   text: {
+    fontFamily: 'monospace',
     fontSize: 18,
     fontWeight: 'bold',
     color: 'black',

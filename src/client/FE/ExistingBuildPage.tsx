@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import TextComponent from '../Assets/TextComponent';
 import ButtonComponent from '../Assets/ButtonComponent';
 import DisplayLegoSetComponent from '../Assets/DisplayLegoSetComponent';
@@ -26,35 +26,40 @@ const ExistingBuildPage = ({ navigation }) => {
       setExistingCollection(result);
     }
     set();
-  });
+  }, []);
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        {existingCollection.map(collection => {
-          return (
-            <DisplayLegoSetComponent
-              legoSet={collection}
-              func={() => setSelectedBuild(collection)}
+    <ImageBackground
+      source={require('../Assets/images/white_lego.jpg')}
+      style={styles.background_img}>
+      <View style={styles.container}>
+        <ScrollView>
+          {existingCollection.map(collection => {
+            return (
+              <DisplayLegoSetComponent
+                legoSet={collection}
+                func={() => setSelectedBuild(collection)}
+                isSelected={selectedBuild === collection}
+              />
+            );
+          })}
+        </ScrollView>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{ flex: 0.8 }}>
+            <ButtonComponent
+              text="Remove Build"
+              func={() => removeBuild(selectedBuild, setSelectedBuild)}
             />
-          );
-        })}
-      </ScrollView>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <View style={{ flex: 0.8 }}>
-          <ButtonComponent
-            text="Remove Build"
-            func={() => removeBuild(selectedBuild, setSelectedBuild)}
-          />
-        </View>
-        <View style={{ flex: 1 }}>
-          <ButtonComponent
-            text="Let's start building!"
-            func={() => handleBuild(selectedBuild, navigation)}
-          />
+          </View>
+          <View style={{ flex: 1 }}>
+            <ButtonComponent
+              text="Let's start building!"
+              func={() => handleBuild(selectedBuild, navigation)}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -63,6 +68,11 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  background_img: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
   },
 });
 
