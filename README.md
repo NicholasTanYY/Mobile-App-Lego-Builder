@@ -112,7 +112,12 @@ Our product should enable the user of the mobile application to:
 3. Improve the accuracy and reliability of the Computer Vision model
 
 ### User Testing
+
 1. User Testing: https://docs.google.com/document/d/1KOl9hAJPEdQePmJ93Pbw-kRJU55sYLqRbEh7e0U-pvI/edit?usp=sharing
+
+### API Testing using Postman
+
+1. API Testing: https://docs.google.com/document/d/1kVS0D4sKpd31kNcTZr_fbvCGtTM5ybF1H4piTJvz-ig/edit?usp=sharing
 
 ### Other Computer Vision files
 
