@@ -9,10 +9,12 @@ import {
   removeBuild,
 } from '../BE/ExistingBuildPage';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { remove } from 'cheerio/lib/api/manipulation';
 
 const ExistingBuildPage = ({ navigation }) => {
   const [existingCollection, setExistingCollection] = useState([]);
   const [selectedBuild, setSelectedBuild] = useState();
+  const [refreshList, setRefreshList] = useState(false);
 
   useEffect(() => {
     return navigation.addListener('focus', () => {
@@ -26,7 +28,9 @@ const ExistingBuildPage = ({ navigation }) => {
       setExistingCollection(result);
     }
     set();
-  }, []);
+
+    setRefreshList(false);
+  }, [refreshList === true]);
 
   return (
     <ImageBackground
@@ -48,7 +52,9 @@ const ExistingBuildPage = ({ navigation }) => {
           <View style={{ flex: 0.8 }}>
             <ButtonComponent
               text="Remove Build"
-              func={() => removeBuild(selectedBuild, setSelectedBuild)}
+              func={() =>
+                removeBuild(selectedBuild, setSelectedBuild, setRefreshList)
+              }
             />
           </View>
           <View style={{ flex: 1 }}>

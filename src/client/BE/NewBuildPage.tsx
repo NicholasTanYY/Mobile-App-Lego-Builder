@@ -3,7 +3,7 @@ import { SERVER } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const handleSearchBuild = async (legoID, setLegoSet, navigation) => {
-  if (legoID == "") {
+  if (legoID == '') {
     return;
   }
   let resp;
@@ -18,8 +18,8 @@ export const handleSearchBuild = async (legoID, setLegoSet, navigation) => {
     );
     setLegoSet(resp.data); // Set the state with new data
   } catch {
-    alert("Cannot find build :<");
-    navigation.navigate("New Build");
+    alert('Cannot find build :<');
+    navigation.navigate('New Build');
   }
 };
 
@@ -27,13 +27,16 @@ export const handleAddBuild = async (selectedLegoSet, navigation) => {
   if (!selectedLegoSet) {
     return;
   }
-  let username = await AsyncStorage.getItem("userData");
-  selectedLegoSet["currentPage"] = 1;
-  const resp = await axios.post(`${SERVER}/api/addBuild`, {username, selectedLegoSet});
+  let username = await AsyncStorage.getItem('userData');
+  selectedLegoSet['currentPage'] = 1;
+  const resp = await axios.post(`${SERVER}/api/addBuild`, {
+    username,
+    selectedLegoSet,
+  });
   if (resp.data.error) {
     alert(resp.data.error);
     return;
   }
-  alert("Build added");
+  alert('Build added');
   navigation.navigate('Existing Build');
 };

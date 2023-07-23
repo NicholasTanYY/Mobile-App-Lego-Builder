@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 8,
+    margin: 6,
   },
   selectedBox: {
     borderColor: 'blue',
