@@ -26,6 +26,10 @@
       "sha1": "dff5077b61747488181389c0e4c0b43443abd789"
     },
     {
+      "path": "assets/model/legoDetectionModel.tflite",
+      "sha1": "92bbf06a1f1cf1787fa4e5ca4aef75f7e89da631"
+    },
+    {
       "path": "assets/model/M1_float16.tflite",
       "sha1": "ac3bc530e5a46a086c9f5e59fc15b513431cf3c0"
     },
