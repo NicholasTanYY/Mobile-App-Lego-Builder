@@ -27,7 +27,7 @@
     },
     {
       "path": "assets/model/legoDetectionModel.tflite",
-      "sha1": "92bbf06a1f1cf1787fa4e5ca4aef75f7e89da631"
+      "sha1": "d8b37a2a1ba14cfe33729d0a66fd636808691cd5"
     },
     {
       "path": "assets/model/M1_float16.tflite",

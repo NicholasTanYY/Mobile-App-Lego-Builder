@@ -16,6 +16,7 @@ const CameraComponent = () => {
 
   const frameProcessorConfig: FrameProcessorConfig = {
     modelFile: `legoDetectionModel.tflite`, // <!-- name and extension of your model
+    scoreThreshold: 0.2
   };
 
   const windowDimensions = useWindowDimensions();
